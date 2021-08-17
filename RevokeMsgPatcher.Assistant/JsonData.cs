@@ -16,7 +16,7 @@ namespace RevokeMsgPatcher
             return new Bag
             {
                 Apps = AppConfig(),
-                LatestVersion = "1.0",
+                LatestVersion = "1.1",
                 Notice = ""
             };
         }
@@ -69,8 +69,29 @@ namespace RevokeMsgPatcher
                             new CommonModifyInfo
                             {
                                 Name="WeChatWin.dll",
-                                StartVersion="3.2.0.00",
+                                StartVersion="3.3.5.15",
                                 EndVersion="",
+                                ReplacePatterns = new List<ReplacePattern>
+                                {
+                                    new ReplacePattern
+                                    {
+                                        Search = ByteUtil.HexStringToByteArray("00 85 C0 74 32 B9 3F 3F 95 11 8A"),
+                                        Replace = ByteUtil.HexStringToByteArray("00 85 C0 EB 32 B9 3F 3F 95 11 8A"),
+                                        Category = "防撤回"
+                                    },
+                                    new ReplacePattern
+                                    {
+                                        Search = ByteUtil.HexStringToByteArray("E8 6B 00 00 00 84 C0 74 56 56 6A 00"),
+                                        Replace = ByteUtil.HexStringToByteArray("E8 6B 00 00 00 84 C0 EB 56 56 6A 00"),
+                                        Category = "多开"
+                                    }
+                                }
+                            },
+                            new CommonModifyInfo
+                            {
+                                Name="WeChatWin.dll",
+                                StartVersion="3.2.0.00",
+                                EndVersion="3.3.5.00",
                                 ReplacePatterns = new List<ReplacePattern>
                                 {
                                     new ReplacePattern
@@ -159,6 +180,44 @@ namespace RevokeMsgPatcher
                         "WeChatWin.dll",
                         new List<ModifyInfo>
                         {
+                            new ModifyInfo {
+                                Name="WeChatWin.dll",
+                                Version="3.3.5.25",
+                                SHA1Before="3e94753ccbc2799d98f3c741377e99bdae33b4cf",
+                                SHA1After="ab98f83fc16674ac4911380882c79c3ca4c2fd71",
+                                Changes = new List<Change>
+                                {
+                                    new Change
+                                    {
+                                        Position =0x003417D9,
+                                        Content =new byte[] { 0xEB }
+                                    },
+                                    new Change
+                                    {
+                                        Position =0x00B98A67,
+                                        Content =new byte[] { 0xEB }
+                                    }
+                                }
+                            },
+                            new ModifyInfo {
+                                Name="WeChatWin.dll",
+                                Version="3.3.5.15",
+                                SHA1Before="7d06e076c525aec6783e919dde4ee11ba9fdb198",
+                                SHA1After="f22ab996a1779c2b41132d42c4fdf98c003284e0",
+                                Changes = new List<Change>
+                                {
+                                    new Change
+                                    {
+                                        Position =0x0033D769,
+                                        Content =new byte[] { 0xEB }
+                                    },
+                                    new Change
+                                    {
+                                        Position =0x00B8F2C7,
+                                        Content =new byte[] { 0xEB }
+                                    }
+                                }
+                            },
                             new ModifyInfo {
                                 Name="WeChatWin.dll",
                                 Version="2.8.0.112",
